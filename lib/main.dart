@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Home.dart';
 import 'LoginPage.dart';
-
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 void main() {
+  KakaoSdk.init(nativeAppKey: '8b23a6ba425962d67f6ceda74101017d');
+  
   runApp(MyApp());
 }
 
