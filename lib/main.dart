@@ -1,20 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:lovepet/edit_Profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Home.dart';
 import 'LoginPage.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-void main() {
+Future<Null> CheckLogin() async {
+
+}
+
+main() async {
+  var token;
   KakaoSdk.init(nativeAppKey: '8b23a6ba425962d67f6ceda74101017d');
-  
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  token = sharedPreferences.getString('token');
+
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var token;
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '러브',
+      initialRoute: token == null ? '/initial' : '/home',
+      routes: {
+        '/': (context) => Home(),
+        '/edit': (context) => EditProfile(),
+        '/initial': (context) => LoginPage()
+      },
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -27,7 +50,6 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage()
     );
   }
 }
@@ -51,8 +73,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -68,9 +88,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-      ),
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          ),
     );
   }
 }

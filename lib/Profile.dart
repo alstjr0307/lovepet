@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class Profile extends StatefulWidget {
@@ -14,9 +15,11 @@ class _ProfileState extends State<Profile> {
       body: Column(
         children: [
           _MainPhoto(),
-          Name('시츄'),
-          Property(18, ['산책 좋아함','귀여움'
-          ])
+
+          Name('또박이'),
+          Property(18, '시츄', ['산책 좋아함','귀여움'
+          ]),
+          _edit(context),
         ],
 
       )
@@ -25,12 +28,35 @@ class _ProfileState extends State<Profile> {
 }
 Widget _MainPhoto() {
   return Padding(
-    padding: const EdgeInsets.fromLTRB(0,100,0,50),
+    padding: const EdgeInsets.fromLTRB(0,100,0,10),
     child: Center(
       child: CircleAvatar(
         radius: 100,
         child: Image.asset('ss', scale: 10,),
       )
+    ),
+  );
+}
+Widget _edit(context){
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/edit');
+      },
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.edit,size: 15,color: Colors.grey,),
+            Text(
+              '편집',
+              style: TextStyle(color: Colors.grey),
+            ),
+          ],
+        ),
+
+      ),
     ),
   );
 }
@@ -44,15 +70,17 @@ Widget Name(String name) {
     ),
   );
 }
-Widget Property(int Age, List properties) {
+Widget Property(int Age, String type,List properties) {
   return Center(
     child: Container(
       child: Column(
         children: [
+          Text(type, style: TextStyle(fontFamily: 'Nanum', fontWeight:FontWeight.w700,fontSize: 15),),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text('나이' + Age.toString(), style: TextStyle(fontFamily: 'Nanum', fontWeight:FontWeight.w700,fontSize: 15),),
           ),
+
           for (String property in properties)
             Text('- '+ property, style: TextStyle(fontFamily: 'Nanum', fontWeight:FontWeight.w700,fontSize: 15),),
 
