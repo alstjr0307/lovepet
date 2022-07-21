@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:dio/dio.dart' as dio;
 import 'package:image_picker/image_picker.dart';
 class SetProfile extends StatefulWidget {
   const SetProfile({Key? key}) : super(key: key);
@@ -100,7 +100,7 @@ class _SetProfileState extends State<SetProfile> {
         children: <Widget>[
           CircleAvatar(
             radius: 80,
-            backgroundImage:AssetImage("static/Image/profile.jpg"),
+            backgroundImage:AssetImage("static/Image/profile.jpg", ),
 
 
           ),
@@ -114,7 +114,7 @@ class _SetProfileState extends State<SetProfile> {
                 },
                 child: Icon(
                   Icons.camera_alt,
-                  color: Colors.redAccent,
+                  color: Colors.white,
                   size: 40,
                 ),
               )
@@ -150,14 +150,14 @@ class _SetProfileState extends State<SetProfile> {
                   onPressed: () {
                     takePhoto(ImageSource.camera);
                   },
-                  label: Text('Camera', style: TextStyle(fontSize: 20),),
+                  label: Text('촬', style: TextStyle(fontSize: 20),),
                 ),
                 FlatButton.icon(
                   icon: Icon(Icons.photo_library, size: 50,),
                   onPressed: () {
                     takePhoto(ImageSource.gallery);
                   },
-                  label: Text('Gallery', style: TextStyle(fontSize: 20),),
+                  label: Text('갤러리', style: TextStyle(fontSize: 20),),
                 )
               ],
             )

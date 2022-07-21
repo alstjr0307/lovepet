@@ -5,15 +5,20 @@ import 'LoginPage.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
 import 'SetProfile.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 late String initScreen;
 Future<void> main() async {
   KakaoSdk.init(nativeAppKey: '8b23a6ba425962d67f6ceda74101017d');
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  UserCredential userCredential = await FirebaseAuth.instance.signInAnonymously();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   initScreen = 'none';
-  initScreen = prefs.getString('token')!;
+  initScreen = prefs.getString('token') ?? 'none';
+  print(initScreen);
   print(initScreen);
   runApp(MyApp());
 }
